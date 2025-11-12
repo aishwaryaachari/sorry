@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sorry Baby 💖</title>
+  <style>
+    body {
+      margin: 0;
+      height: 100vh;
+      background: linear-gradient(135deg, #ffb6c1, #ffd6e0);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+      overflow: hidden;
+      font-family: 'Poppins', sans-serif;
+      text-align: center;
+    }
+
+    h1 {
+      font-size: 3rem;
+      color: #ff3366;
+      animation: pop 1.5s infinite alternate;
+    }
+
+    p {
+      font-size: 1.2rem;
+      color: #444;
+      margin-top: 10px;
+      max-width: 400px;
+    }
+
+    .btn {
+      background-color: #ff3366;
+      color: white;
+      border: none;
+      padding: 12px 25px;
+      border-radius: 25px;
+      font-size: 1rem;
+      margin: 10px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+
+    .btn:hover {
+      background-color: #ff6699;
+      transform: scale(1.1);
+    }
+
+    @keyframes pop {
+      0% { transform: scale(1); }
+      100% { transform: scale(1.1); }
+    }
+
+    .heart {
+      position: absolute;
+      bottom: -10px;
+      width: 20px;
+      height: 20px;
+      background-color: #ff3366;
+      transform: rotate(45deg);
+      animation: float 5s infinite;
+    }
+
+    .heart::before,
+    .heart::after {
+      content: '';
+      position: absolute;
+      width: 20px;
+      height: 20px;
+      background-color: #ff3366;
+      border-radius: 50%;
+    }
+
+    .heart::before { top: -10px; left: 0; }
+    .heart::after { left: -10px; top: 0; }
+
+    @keyframes float {
+      0% { transform: translateY(0) rotate(45deg); opacity: 1; }
+      100% { transform: translateY(-100vh) rotate(45deg); opacity: 0; }
+    }
+
+    #forgive-text {
+      display: none;
+      color: #ff3366;
+      font-size: 2rem;
+      font-weight: bold;
+      margin-top: 20px;
+    }
+
+    #sad-emoji {
+      font-size: 2rem;
+      display: none;
+      margin-top: 20px;
+      transition: all 0.5s ease-in-out;
+    }
+  </style>
+</head>
+<body>
+  <h1>Sorry Baby 🥺💖</h1>
+  <p>I didn’t mean to upset you... You mean the world to me. Please forgive me, my love 💌</p>
+
+  <div>
+    <button class="btn" onclick="forgiveMe()">Forgive Me?</button>
+    <button class="btn" onclick="sayNo()">No 😔</button>
+  </div>
+
+  <div id="forgive-text">Yay! I love you 😘💞</div>
+  <div id="sad-emoji">😢</div>
+
+  <audio autoplay loop>
+    <source src="https://cdn.pixabay.com/download/audio/2023/03/28/audio_6a6a01849f.mp3?filename=soft-romantic-piano-144997.mp3" type="audio/mpeg">
+  </audio>
+
+  <script>
+    let emojiSize = 2;
+
+    function createHeart() {
+      const heart = document.createElement('div');
+      heart.classList.add('heart');
+      heart.style.left = Math.random() * 100 + 'vw';
+      heart.style.animationDuration = (3 + Math.random() * 2) + 's';
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 5000);
+    }
+    setInterval(createHeart, 300);
+
+    function forgiveMe() {
+      document.getElementById('forgive-text').style.display = 'block';
+      document.getElementById('sad-emoji').style.display = 'none';
+      for (let i = 0; i < 20; i++) {
+        setTimeout(createHeart, i * 100);
+      }
+    }
+
+    function sayNo() {
+      const emoji = document.getElementById('sad-emoji');
+      emoji.style.display = 'block';
+      emojiSize += 1;
+      emoji.style.fontSize = emojiSize + 'rem';
+      if (emojiSize > 8) {
+        emoji.textContent = '🥺';
+      }
+    }
+  </script>
+</body>
+</html>
